@@ -65,6 +65,7 @@ object Config {
 
         object Play {
             const val location = "com.google.android.gms:play-services-location:18.0.0"
+            const val wearable = "com.google.android.gms:play-services-wearable:17.1.0"
         }
 
         object Firebase {
