@@ -54,6 +54,25 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
+    flavorDimensions("version")
+    productFlavors {
+        create("minimal") {
+            applicationIdSuffix = ".minimal"
+            versionNameSuffix = "-minimal"
+        }
+        create("full") {
+            applicationIdSuffix = ""
+            versionNameSuffix = "-full"
+        }
+
+        // Generate a list of application ids into BuildConfig
+        val values = productFlavors.joinToString {
+            "\"${it.applicationId ?: defaultConfig.applicationId}${it.applicationIdSuffix}\""
+        }
+
+        defaultConfig.buildConfigField("String[]", "APPLICATION_IDS", "{$values}")
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -66,9 +85,16 @@ android {
 dependencies {
     implementation(project(":common"))
 
+    implementation(Config.Dependency.Kotlin.coroutines)
+    implementation(Config.Dependency.Kotlin.coroutinesAndroid)
+
     implementation(Config.Dependency.Google.material)
 
     implementation(Config.Dependency.AndroidX.wear)
     implementation(Config.Dependency.Google.wearableSupport)
+    implementation(Config.Dependency.Play.wearable)
     compileOnly(Config.Dependency.Google.wearable)
+
+    implementation(Config.Dependency.Google.dagger)
+    kapt(Config.Dependency.Google.daggerCompiler)
 }

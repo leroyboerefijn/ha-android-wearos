@@ -145,6 +145,8 @@ dependencies {
     implementation(Config.Dependency.AndroidX.navigationUi)
     implementation(Config.Dependency.Google.material)
 
+    implementation(Config.Dependency.Play.wearable)
+
     implementation(Config.Dependency.AndroidX.roomRuntime)
     implementation(Config.Dependency.AndroidX.roomKtx)
     kapt(Config.Dependency.AndroidX.roomCompiler)
